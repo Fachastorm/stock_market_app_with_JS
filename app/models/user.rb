@@ -1,12 +1,13 @@
 class User < ApplicationRecord
-  has_many :user_stocks
-  has_many :stocks, through: :user_stocks
+  has_many :positions
+  has_many :stocks, through: :positions
   has_many :portfolios 
   
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:facebook]
+         :recoverable, :rememberable, :trackable, :validatable 
+  devise :omniauthable, :omniauth_providers => [:facebook]
 
 
 def self.from_omniauth(auth)
@@ -22,12 +23,5 @@ def self.from_omniauth(auth)
     "#{first_name} #{last_name}".strip 
   end 
   
-
-  def stock_already_owned? 
-    stock = Stock.find_by_ticker(ticker)
-    return false unless stock 
-    
-    user_stocks.where(stock_id: stock.id).exists?
-  end
   
 end

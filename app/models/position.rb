@@ -1,4 +1,4 @@
-class UserStock < ApplicationRecord
+class Position < ApplicationRecord
     belongs_to :users
     belongs_to :stock
     
