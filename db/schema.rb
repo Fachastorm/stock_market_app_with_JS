@@ -15,7 +15,6 @@ ActiveRecord::Schema.define(version: 20180122235612) do
   create_table "portfolios", force: :cascade do |t|
     t.integer "user_id"
     t.string "name"
-    t.integer "total_value"
   end
 
   create_table "stocks", force: :cascade do |t|
