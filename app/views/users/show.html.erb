@@ -4,6 +4,8 @@
 <%= @user.full_name%> 
 
 <h3>Email</h3>
-<%= @user.email%> 
+<%= @user.email%> <br>
 
  
+<%= link_to "Look up a stock!", stock_path %> <br>
+<%= link_to "View your portfolio", user_portfolio_path(@user) %> <br>

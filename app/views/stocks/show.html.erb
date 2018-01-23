@@ -1,0 +1,28 @@
+  <%= form_tag user_stock_path, remote: true, method: :get %>
+        <%= text_field_tag :stock, params[:stock], placeholder: 'Stock ticker symbol'%> 
+        <%= button_tag(type: 'button') do %> 
+          <%= content_tag(:strong, 'Look up a stock') %>
+            <%end%>
+
+  <% if @stock %>>
+      <strong>Symbol: </strong><%= @stock.ticker %>
+      <strong>Name: </strong><%= @stock.name %>
+      <strong>Price: </strong><%= @stock.price %>
+
+      <% if current_user.can_add_stock? @stock.ticker %>
+        <%= link_to 'Add to my stocks',
+                    user_stock_path(user: current_user, stock_ticker: @stock.ticker,
+                                     stock_id: @stock.id ? @stock.id : ''),
+                    method: :post %>
+      <% else %>
+        <h4>
+          The stock cannot be tracked because you have already added
+
+          <% if current_user.stock_already_added? @stock.ticker %>
+            this stock.
+          <% elsif !current_user.under_stock_limit? %>
+            10 stocks.
+          <% end %>
+      </h4>
+      <% end %>
+  <% end %>
