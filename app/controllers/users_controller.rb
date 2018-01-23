@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     
     def portfolio 
         @user = current_user
-        @user_stocks = @user.stocks 
+        @portfolio = @user.stocks 
     end 
     
 end
