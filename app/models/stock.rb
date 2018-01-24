@@ -16,4 +16,13 @@ class Stock < ApplicationRecord
         puts "new stocks: #{new_stock.ticker}"
         new_stock
     end
+
+    def price 
+        closing_price = StockQuote::Stock.quote(ticker).l 
+        return "#{closing_price} (Closing)" if closing_price
+        opening_price = StockQuote::Stock.quote(ticker).op 
+        return "#{opening_price} (Opening)" if opening_price
+        "Unavailable"
+    end 
+    
 end
