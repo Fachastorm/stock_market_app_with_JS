@@ -3,12 +3,12 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'welcome#home'
   resources :users  do 
-    resources :portfolios, only: [:show]
+    resources :positions, only: [:show]
   end
   
-  resources :stocks, only: [:show]
-  
-  resources :user_stocks, only: [:edit, :update]
+  get 'search_stocks',  to: 'stocks#search'
+    
+  resources :positions, only: [:edit, :update]
   
   
 end

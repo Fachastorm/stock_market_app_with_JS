@@ -10,12 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180122235612) do
-
-  create_table "portfolios", force: :cascade do |t|
-    t.integer "user_id"
-    t.string "name"
-  end
+ActiveRecord::Schema.define(version: 20180122190411) do
 
   create_table "positions", force: :cascade do |t|
     t.integer "user_id"

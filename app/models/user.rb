@@ -17,4 +17,16 @@ class User < ApplicationRecord
     end
   end
   
+
+  def can_add_stock?(ticker)
+      !stock_already_owned?(ticker)
+  end
+
+  def stock_already_owned?
+    stock = Stock.find_by_ticker(ticker)
+       return false unless stock 
+   
+       positions.where(stock_id: stock.id).exists?
+   end
+
 end
