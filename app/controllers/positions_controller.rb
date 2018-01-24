@@ -1,14 +1,14 @@
 class PositionsController < ApplicationController
     
     def index 
-        @positions = Postion.all 
+        @positions = Position.all 
     end
 
     def show 
     end 
 
     def new 
-        @position = Position.new 
+        @position = Position.new
     end 
 
     def edit 

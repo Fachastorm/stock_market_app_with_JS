@@ -1,4 +1,4 @@
-<%= form_tag search_stocks_path, remote: true, method: :get %>
+<%= form_tag search_stocks_path, method: :get %>
     <%= text_field_tag :stock, params[:stock], placeholder: 'Stock ticker symbol'%>
         <%= button_tag(type: 'button') do %>
             <%= content_tag('Look up a stock') %>
@@ -14,9 +14,8 @@
 
                                     <% if current_user.can_add_stock? @stock.ticker %>
                                         <%= link_to 'Add to my stocks',
-                    position_path(user: current_user, stock_ticker: @stock.ticker,
-                                     stock_id: @stock.id ? @stock.id : ''),
-                    method: :post %>
+                                    new_position_path(user: current_user, stock_ticker: @stock.ticker,
+                                     stock_id: @stock.id) method: :post %>
                                             <% else %>
                                                 <h4>
                                                     The stock cannot be tracked because you have already added

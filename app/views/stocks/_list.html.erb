@@ -1,0 +1,30 @@
+<thead>
+    <tr>
+        <th>Name</th>
+        <th>Symbol</th>
+        <th>Current Price</th>
+        <% if @user.id == current_user.id %>
+            <th>Actions</th>
+            <% end %>
+    </tr>
+</thead>
+<tbody>
+    <% @positions.each do |position| %>
+        <tr>
+            <td>
+                <%= stock.name %>
+            </td>
+            <td>
+                <%= stock.ticker %>
+            </td>
+            <td>
+                <%= stock.price %>
+            </td>
+            <% if @user.id == current_user.id %>
+                <td>
+                    <%= link_to 'Remove', position_path(position), method: :delete%>
+                </td>
+                <% end %>
+        </tr>
+        <% end %>
+</tbody>

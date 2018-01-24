@@ -1,0 +1,42 @@
+<h2>These are all your positions</h2>
+
+
+
+
+
+<h1>Listing User Stocks</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>User</th>
+            <th>Stock</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% @positions.each do |position| %>
+            <tr>
+                <td>
+                    <%= position.user_id %>
+                </td>
+                <td>
+                    <%= position.stock_id %>
+                </td>
+                <td>
+                    <%= link_to 'Show', position_path %>
+                </td>
+                <td>
+                    <%= link_to 'Edit', edit_position_path(position) %>
+                </td>
+                <td>
+                    <%= link_to 'Destroy', position_path, method: :delete %>
+                </td>
+            </tr>
+            <% end %>
+    </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Position', new_position_path %>

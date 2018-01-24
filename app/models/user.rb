@@ -22,7 +22,7 @@ class User < ApplicationRecord
       !stock_already_owned?(ticker)
   end
 
-  def stock_already_owned?
+  def stock_already_owned?(ticker)
     stock = Stock.find_by_ticker(ticker)
        return false unless stock 
    
