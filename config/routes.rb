@@ -8,7 +8,8 @@ Rails.application.routes.draw do
   
   get 'search_stocks',  to: 'stocks#search'
     
-  resources :positions, only: [:edit, :update, :show, :new]
+  resources :positions
+  
   
   
 end

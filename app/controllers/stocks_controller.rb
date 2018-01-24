@@ -7,7 +7,7 @@ class StocksController < ApplicationController
         end 
         
         if @stock 
-            render partial: 'lookup'
+            render :search
         else 
             render status: :not_found, nothing: true
         end 

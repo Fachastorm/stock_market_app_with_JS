@@ -1,7 +1,6 @@
 class User < ApplicationRecord
   has_many :positions
   has_many :stocks, through: :positions
-  has_many :portfolios 
   
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -25,8 +24,7 @@ class User < ApplicationRecord
   def stock_already_owned?(ticker)
     stock = Stock.find_by_ticker(ticker)
        return false unless stock 
-   
-       positions.where(stock_id: stock.id).exists?
+        positions.where(stock_id: stock.id).exists?
    end
 
 end
