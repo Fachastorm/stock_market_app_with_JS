@@ -7,7 +7,7 @@ class Portfolio < ApplicationRecord
      stock = Stock.find_by_ticker(ticker)
         return false unless stock 
     
-        user_stocks.where(stock_id: stock.id).exists?
+        positions.where(stock_id: stock.id).exists?
     end
 
 end

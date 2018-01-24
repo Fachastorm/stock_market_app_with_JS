@@ -1,7 +1,7 @@
 class PortfoliosController < ApplicationController
 
     def show 
-        @user = current_user
+        @user = User.find_by(id params[:id])
         @portfolio = @user.stocks
     end
     
