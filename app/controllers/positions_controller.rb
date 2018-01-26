@@ -51,8 +51,8 @@ class PositionsController < ApplicationController
 
 
         def destroy
-            @position = Position.find(params[:id])
             @position.destroy
+            redirect_to portfolio_path, notice: 'Stock was successfully removed from portfolio.'
         end
 
 
@@ -64,7 +64,7 @@ class PositionsController < ApplicationController
     end
 
     def set_position
-        @position = Position.find(params(:id))
+        @position = Position.find(params[:id])
     end
 
 

@@ -7,7 +7,8 @@ Rails.application.routes.draw do
   end
   
   get 'search_stocks',  to: 'stocks#search'
-  get 'portfolio', to: 'users#portfolio'
+  get 'portfolio',   to: 'users#portfolio'
+
     
   resources :positions
   

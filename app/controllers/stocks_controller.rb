@@ -10,8 +10,10 @@ class StocksController < ApplicationController
         if @stock 
             render  :search
         else 
-        render status: :not_found            
+         @stock.nil? 
+         render :search, notice: "Stock does not exist." 
     end
+end
 
 
 end 
