@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_many :positions
   has_many :stocks, through: :positions
+  has_many :watchlists 
   
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
