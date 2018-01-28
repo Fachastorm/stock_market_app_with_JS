@@ -6,6 +6,10 @@ Rails.application.routes.draw do
   resources :users  do 
     resources :positions, only: [:index, :create, :destroy]
   end
+
+  resources :users do 
+    resources :watchlists, only: [:index, :show]
+  end 
   
   get 'search_stocks',  to: 'stocks#search'
 

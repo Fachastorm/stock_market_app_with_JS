@@ -55,7 +55,7 @@ class PositionsController < ApplicationController
 
         def destroy
             @position.destroy 
-            redirect_to user_positions_path, notice: 'Stock was successfully removed from portfolio.'
+            redirect_to user_positions_path, notice: "Stock #{@position.stock.ticker} was successfully removed from portfolio."
         end
 
 
