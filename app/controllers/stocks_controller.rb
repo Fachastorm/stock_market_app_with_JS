@@ -1,17 +1,18 @@
 class StocksController < ApplicationController
     before_action :authenticate_user!
 
-    validates :ticker, presence: true 
 
-
-    def search 
-        @user = User.new
+    def search
+        @user = User.find_by(params[:id])
         if params[:stock]
             @stock = Stock.find_by_ticker(params[:stock])
             @stock ||= Stock.new_from_lookup(params[:stock])
+
         end 
         
         if @stock 
+            @user = User.find_by(params[:id])
+            @stock.user_ids = @user.id
             render  :search
         else 
          @stock.nil? 

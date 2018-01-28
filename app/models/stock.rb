@@ -11,12 +11,8 @@ class Stock < ApplicationRecord
 
     def self.new_from_lookup(ticker_symbol)
         stock_results = StockQuote::Stock.quote(ticker_symbol)
-        puts "name: #{stock_results.name}"
-        return nil unless stock_results.name 
-
         new_stock = Stock.new(ticker: stock_results.symbol, name: stock_results.name)
         new_stock.last_price = new_stock.price
-        puts "new stocks: #{new_stock.ticker}"
         new_stock
     end
 

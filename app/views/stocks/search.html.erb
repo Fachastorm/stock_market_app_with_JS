@@ -12,9 +12,10 @@
                                 <strong>Price: </strong>
                                 <%= @stock.price %>
 
+
                                     <% if current_user.can_add_stock? @stock.ticker %>
                                         <%= link_to 'Add to my stocks',
-                                        user_positions_path(user_id: current_user.id, stock_ticker: @stock.ticker, stock_id: @stock.id ? @stock.id : ''), method: :post %>
+                                        user_positions_path(user_id: @user.id, stock_ticker: @stock.ticker, stock_id: @stock.id ? @stock.id : ''), method: :post %>
                                             <% else %>
                                                 <h4>
                                                     The stock cannot be tracked because you have already added

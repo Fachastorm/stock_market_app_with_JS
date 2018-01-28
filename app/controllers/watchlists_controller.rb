@@ -1,7 +1,7 @@
 class WatchlistsController < ApplicationController
-    before_action :authenticate_user!, except: [:index]
+    before_action :authenticate_user!
         def index
-            @user = current_user 
+            @user = User.find_by(params[:id])
             @watchlists = Watchlist.all 
         end 
         
