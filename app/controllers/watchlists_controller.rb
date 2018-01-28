@@ -5,20 +5,42 @@ class WatchlistsController < ApplicationController
             @watchlists = Watchlist.all 
         end 
         
-        def new 
-            @user = current_user
-            @watchlist = Watchlist.new 
+        def new
+            @watchlist = current_user.watchlists.build
         end
 
         def show 
+            @watchlist = Watchlist.find(params[:id])
         end 
 
         
-        def create 
-            @watchlist = Watchlist.create(watchlist_params)
-            redirect_to user_watchlist_path(@watchlist)
+        def create
+            @watchlist = current_user.watchlists.new(watchlist_params)
+                if @watchlist.save 
+            redirect_to watchlists_path
+                else 
+                    render :new 
+                end
         end 
 
+        def edit 
+            @watchlist = Watchlist.find_by(id: params[:id])
+        end
+
+        def update 
+            if @watchlist.update(watchlist_params)
+                redirect_to watchlists_path
+            else 
+                render :new
+            end 
+        end
+
+
+        def destroy
+            @watchlist = Watchlist.find(params[:id])
+            @watchlist.destroy
+            redirect_to watchlists_path, notice: "#{@watchlist.name} was successfully removed from watchlist."
+        end
 
 
         private 

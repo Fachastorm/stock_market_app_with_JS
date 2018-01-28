@@ -2,10 +2,10 @@ class PositionsController < ApplicationController
     before_action :authenticate_user!
 
     before_action :set_position, only: [:show, :edit, :update, :destroy]
+
     def index
+        @user = User.find_by(id: params[:user_id])
         @positions = Position.all
-        @user = current_user 
-        @stock = Stock.find_by(id: [params[:id]])
     end
 
     def show 
@@ -20,7 +20,7 @@ class PositionsController < ApplicationController
         @position = Position.find(params[:id])
     end 
     def create
-        if params[:stock_id].present?
+        if params[:stock_id].present? && current_user
           @position = Position.new(stock_id: params[:stock_id], user: current_user)
 
         else

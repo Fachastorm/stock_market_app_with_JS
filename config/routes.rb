@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   root 'welcome#home'
 
   resources :users do 
-    resources :watchlists, only: [:show, :create, :new, :destroy]
+    resources :watchlists, only: [:show, :create, :new, :destroy, :edit]
   end
   
   resources :users  do 
