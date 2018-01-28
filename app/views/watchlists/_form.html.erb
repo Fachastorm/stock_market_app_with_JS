@@ -1,11 +1,11 @@
-<%= form_for(@position) do |f| %>
-    <% if @position.errors.any? %>
+<%= form_for(@watchlist) do |f| %>
+    <% if @watchlist.errors.any? %>
         <div id="error_explanation">
             <h2>
-                <%= pluralize(position.errors.count, "error") %> prohibited this position from being saved:</h2>
+                <%= pluralize(watchlist.errors.count, "error") %> prohibited this watchlist from being saved:</h2>
 
             <ul>
-                <% position.errors.full_messages.each do |message| %>
+                <% watchlist.errors.full_messages.each do |message| %>
                     <li>
                         <%= message %>
                     </li>
@@ -15,13 +15,13 @@
         <% end %>
 
             <div class="field">
-                <%= f.label :user_id %>
-                    <%= f.text_field :user_id %>
+                <%= f.label "Stock Name Or Ticker" %>
+                    <%= f.text_field :name %>
             </div>
 
             <div class="field">
-                <%= f.label :stock_id %>
-                    <%= f.text_field :stock_id %>
+                <%= f.label "Description" %>
+                    <%= f.text_area :description %>
             </div>
 
             <div class="actions">

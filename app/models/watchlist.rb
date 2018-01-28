@@ -1,3 +1,3 @@
 class Watchlist < ApplicationRecord 
-    belongs_ to :user 
+    belongs_to :user 
 end 
