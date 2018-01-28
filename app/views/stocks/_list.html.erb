@@ -10,21 +10,21 @@
         </tr>
     </thead>
     <tbody>
-        <% @position.each do |position| %>
+        <% @positions.each do |position| %>
             <tr>
                 <td>
-                    <%= position.name %>
+                    <%= position.stock.name %>
                 </td>
                 <td>
-                    <%= position.ticker %>
+                    <%= position.stock.ticker %>
                 </td>
                 <td>
-                    <%= position.price %>
+                    <%= position.stock.price %>
                 </td>
 
                 <% if @user.id == current_user.id %>
                     <td>
-                        <%= link_to 'Delete', position_path(position), :method => :delete %>
+                        <%= link_to 'Delete', user_position_path, :method => :delete %>
                     </td>
                     <% end %>
             </tr>

@@ -2,10 +2,9 @@
     <h3>
         <%= link_to 'Home', root_path %> |
             <% if user_signed_in? %>
-                <%= link_to "My Portfolio", portfolio_path(@user) %> |
+                <%= link_to "My Portfolio", user_positions_path(current_user) %> |
                     <%= link_to "Stock Price Check", search_stocks_path %> |
                         <%= link_to 'Sign Out', destroy_user_session_path, method: 'delete' %> |
-                            <!-- <%= link_to 'Watchlist %> -->
                             <% else %>
                                 <%= link_to 'Sign Up', new_user_registration_path %> |
                                     <%= link_to 'Log In', new_user_session_path %> |

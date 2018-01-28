@@ -2,6 +2,8 @@ class PositionsController < ApplicationController
     before_action :set_position, only: [:show, :edit, :update, :destroy]
     def index
         @positions = Position.all
+        @user = current_user 
+        @stock = Stock.find_by(id: [params[:id]])
     end
 
     def show 
@@ -18,6 +20,7 @@ class PositionsController < ApplicationController
     def create
         if params[:stock_id].present?
           @position = Position.new(stock_id: params[:stock_id], user: current_user)
+
         else
           stock = Stock.find_by_ticker(params[:stock_ticker])
           if stock
@@ -25,7 +28,7 @@ class PositionsController < ApplicationController
           else
             stock = Stock.new_from_lookup(params[:stock_ticker])
             if stock.save
-              @position = Position.new(user: current_user, stock: stock)
+              @position = Position.new(user: current_user, stock: stock)              
             else
               @position = nil
               flash[:error] = "Stock is not available"
@@ -33,7 +36,7 @@ class PositionsController < ApplicationController
         end
         end
         if @position.save
-            redirect_to portfolio_path, notice: "Stock #{@position.stock.ticker} stock was successfully added" 
+            redirect_to user_positions_path(current_user), notice: "Stock #{@position.stock.ticker} stock was successfully added" 
         else 
             render :new  
         
@@ -42,17 +45,17 @@ class PositionsController < ApplicationController
 
         def update 
             if @position.update(position_params)
-                redirect_to position_path
+                redirect_to user_positions_path(@user)
             else 
-                redirect_to edit_position_path
+                redirect_to search_path
             
             end 
         end
 
 
         def destroy
-            @position.destroy
-            redirect_to portfolio_path, notice: 'Stock was successfully removed from portfolio.'
+            @position.destroy 
+            redirect_to user_positions_path, notice: 'Stock was successfully removed from portfolio.'
         end
 
 

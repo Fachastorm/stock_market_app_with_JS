@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180127224339) do
+ActiveRecord::Schema.define(version: 20180122190411) do
 
   create_table "positions", force: :cascade do |t|
     t.integer "user_id"
@@ -44,14 +44,6 @@ ActiveRecord::Schema.define(version: 20180127224339) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-  end
-
-  create_table "watchlists", force: :cascade do |t|
-    t.integer "user_id"
-    t.string "name"
-    t.text "notes"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
 end
