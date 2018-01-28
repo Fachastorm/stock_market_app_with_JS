@@ -1,13 +1,13 @@
 class WatchlistsController < ApplicationController
-    before_action :authenticate_user!
+        before_action :authenticate_user!
+        before_action :set_user, only: [:index]
+
         def index
-            @user = User.find_by(params[:id])
-            @watchlists = Watchlist.all 
+            @watchlists = current_user.watchlists 
         end 
         
         def new
-            @user = User.find_by(params[:id]) 
-            @watchlist = @user.watchlists.build
+            @watchlist = current_user.watchlists.build
         end
 
         def show 
@@ -16,8 +16,7 @@ class WatchlistsController < ApplicationController
 
         
         def create
-            @user = User.find_by(params[:id]) 
-            @watchlist = @user.watchlists.create(watchlist_params)
+            @watchlist = current_user.watchlists.build(watchlist_params)
                 if @watchlist.save 
                  redirect_to user_watchlists_path
                 else 
@@ -51,5 +50,9 @@ class WatchlistsController < ApplicationController
         
         def watchlist_params 
             params.require(:watchlist).permit(:name, :description)
+        end
+
+        def set_user 
+            @watchlist = current_user.watchlists 
         end
     end

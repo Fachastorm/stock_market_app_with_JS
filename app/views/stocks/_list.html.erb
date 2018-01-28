@@ -4,7 +4,7 @@
             <th>Name</th>
             <th>Symbol</th>
             <th>Current Price</th>
-            <% if @user.id == current_user.id %>
+            <% if current_user.id == @user.positions.user_id %>
                 <th>Actions</th>
                 <% end %>
 
@@ -23,7 +23,7 @@
                     <%= position.stock.price %>
                 </td>
 
-                <% if @user.id == current_user.id%>
+                <% if current_user.id == @position.user_id%>
                     <td>
                         <%= link_to 'Delete', user_position_path(@user, position), :method => :delete %>
                     </td>
