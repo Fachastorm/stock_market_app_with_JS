@@ -20,24 +20,24 @@ class PositionsController < ApplicationController
         @position = Position.find(params[:id])
     end 
     def create
-        if params[:stock_id].present? && current_user
-          @position = Position.new(stock_id: params[:stock_id], user: current_user)
-
+        if params[:stock_id].present?
+          @position = Position.new(stock_id: params[:stock_id])
         else
           stock = Stock.find_by_ticker(params[:stock_ticker])
           if stock
-            @position = Position.new(user: current_user, stock: stock)
+            @position = Position.new(stock: stock)
           else
             stock = Stock.new_from_lookup(params[:stock_ticker])
             if stock.save
-              @position = Position.new(user: current_user, stock: stock)              
+              @position = Position.new(stock: stock)              
             else
               @position = nil
               flash[:error] = "Stock is not available"
             end
         end
         end
-        if @position.save
+        if  @position.user_id = current_user.id
+            @position.save
             redirect_to user_positions_path(current_user), notice: "Stock #{@position.stock.ticker} stock was successfully added" 
         else 
             render :new  

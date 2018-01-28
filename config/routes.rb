@@ -5,14 +5,13 @@ Rails.application.routes.draw do
   root 'welcome#home'
 
   resources :users do 
-    resources :watchlists, only: [:show, :create, :new, :destroy, :edit]
+    resources :watchlists
   end
   
   resources :users  do 
     resources :positions, only: [:index, :create, :destroy]
   end
 
-  resources  :watchlists, only: [:index]
   
   get 'search_stocks',  to: 'stocks#search'
 

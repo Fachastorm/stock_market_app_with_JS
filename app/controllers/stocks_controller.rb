@@ -1,6 +1,7 @@
 class StocksController < ApplicationController
     before_action :authenticate_user!
 
+    validates :ticker, presence: true 
 
 
     def search 

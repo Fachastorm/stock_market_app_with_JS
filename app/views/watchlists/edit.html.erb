@@ -1,4 +1,6 @@
-<%= form_for @watchlist, url: user_watchlists_path do |f| %>
+<h1>Edit your watchlist stock </h1>
+
+<%= form_for [@user, @watchlist] do |f| %>
     <% if @watchlist.errors.any? %>
         <div id="error_explanation">
             <h2>
