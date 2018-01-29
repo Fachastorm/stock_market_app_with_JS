@@ -4,9 +4,10 @@ class UsersController < ApplicationController
         @user = User.new 
     end 
 
-    def show 
-        @user = User.find_by(id: params[:id])
-        @position = @user.stocks.name 
-    end 
+    def portfolio
+		@positions = current_user.stocks
+		@user = current_user
+	end
+
     
 end

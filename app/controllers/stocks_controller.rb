@@ -3,7 +3,7 @@ class StocksController < ApplicationController
 
 
     def search
-        @user = User.find_by(params[:id])
+        @user = current_user
         if params[:stock]
             @stock = Stock.find_by_ticker(params[:stock])
             @stock ||= Stock.new_from_lookup(params[:stock])
@@ -11,8 +11,8 @@ class StocksController < ApplicationController
         end 
         
         if @stock 
-            @user = User.find_by(params[:id])
-            @stock.user_ids = @user.id
+            @user = current_user
+            @stock.user_ids = current_user.id
             render  :search
         else 
          @stock.nil? 

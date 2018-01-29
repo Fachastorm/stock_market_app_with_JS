@@ -12,7 +12,8 @@ Rails.application.routes.draw do
     resources :positions, only: [:index, :create, :destroy]
   end
 
-  
+  get 'portfolio', to: 'users#portfolio'
+
   get 'search_stocks',  to: 'stocks#search'
 
 

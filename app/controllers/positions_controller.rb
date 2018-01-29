@@ -1,32 +1,33 @@
 class PositionsController < ApplicationController
     before_action :authenticate_user!
 
-    before_action :set_position, only: [:show, :edit, :update, :destroy]
-
     def index
-        @user = User.find_by(params[:id])
-        @positions = @user.positions
+       @positions = Position.all
     end
 
-    def create
+    def new 
+        @position = Position.new
+    end
+
+    def create  
         if params[:stock_id].present?
-          @position = Position.new(stock_id: params[:stock_id])
+        @position = Position.new(stock_id: params[:stock_id], user: current_user)
+      else
+        stock = Stock.find_by_ticker(params[:stock_ticker])
+        if stock
+          @position = Position.new(user: current_user, stock: stock)
         else
-          stock = Stock.find_by_ticker(params[:stock_ticker])
-          if stock
-            @position = Position.new(stock: stock)
+          stock = Stock.new_from_lookup(params[:stock_ticker])
+          if stock.save
+            @position = Position.new(user: current_user, stock: stock)
           else
-            stock = Stock.new_from_lookup(params[:stock_ticker])
-            if stock.save
-              @position = User.find_by(params[:id]).stocks             
-            else
-              @position = nil
-              flash[:error] = "Stock is not available"
-            end
+            @position = nil
+            flash[:error] = "Stock is not available"
+          end
         end
-        end
-        if  @position = User.find_by(params[:id]).stocks
-            redirect_to user_positions_path(current_user), notice: "Stock was successfully added" 
+      end
+        if  @position.save 
+            redirect_to portfolio_path, notice: "Stock was successfully added" 
         else 
             render :index
         
@@ -34,8 +35,9 @@ class PositionsController < ApplicationController
     end
 
         def destroy
+            @position = Position.find_by(params[:id])
             @position.destroy 
-            redirect_to user_positions_path, notice: "Stock #{@position.stock.ticker} was successfully removed from portfolio."
+            redirect_to portfolio_path, notice: "Stock #{@position.stock.ticker} was successfully removed from portfolio."
         end
 
 
@@ -43,11 +45,7 @@ class PositionsController < ApplicationController
     private 
     
     def position_params
-        params.require(:position).permit(:user_id, :stock_id)
-    end
-
-    def set_position
-        @position = Position.find(params[:id])
+        params.permit(:user_id, :stock_id)
     end
 
 
