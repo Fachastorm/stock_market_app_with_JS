@@ -10,7 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180128021740) do
+ActiveRecord::Schema.define(version: 20180206073423) do
+
+  create_table "amounts", force: :cascade do |t|
+    t.string "stock_name"
+    t.integer "quantity"
+    t.integer "watchlist_id"
+  end
 
   create_table "positions", force: :cascade do |t|
     t.integer "user_id"

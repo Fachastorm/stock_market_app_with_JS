@@ -2,30 +2,34 @@
     <% if @watchlist.errors.any? %>
         <div id="error_explanation">
             <h2>
-                <%= pluralize(@watchlist.errors.count, "error") %> prohibited this watchlist from being saved:</h2>
+            <%= pluralize(@watchlist.errors.count, "error") %> prohibited this watchlist from being saved:</h2>
 
             <ul>
-                <% @watchlist.errors.full_messages.each do |message| %>
-                    <li>
-                        <%= message %>
-                    </li>
-                    <% end %>
+            <% @watchlist.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+            <% end %>
             </ul>
         </div>
         <% end %>
 
             <div class="field">
-                <%= f.label "Stock Name Or Ticker" %>
+                <%= f.label "Ticker" %>
                     <%= f.text_field :name %>
             </div>
 
             <div class="field">
                 <%= f.label "Description" %>
-                    <%= f.text_area :description %>
+                <%= f.text_area :description %>
             </div>
 
-            <div class="actions">
-                <%= f.submit %>
-            </div>
+        <%= f.fields_for :amounts do |amount| %>
+            <%= amount.label :stock_name %>
+            <%= amount.text_field :stock_name %>
+            <%= amount.label :quantity %>
+            <%= amount.text_field :quantity %>
             <% f.hidden_field :user_id , :value => current_user.id %>
-                <% end %>
+        <% end %>
+    <div class="action">
+    <%= f.submit %>
+    </div>
+<% end %>

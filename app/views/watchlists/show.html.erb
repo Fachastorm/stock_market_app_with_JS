@@ -1,0 +1,15 @@
+<h1>These are all the stocks and quantities added by other users </h2>
+
+
+<% @watchlists.each do |watchlist| %>
+
+    <p>
+        <% watchlist.amounts.each do |amount| %>
+    </p>
+    <p>
+        <%= amount.stock_name%>: <%= amount.quantity %> added by <%=watchlist.user.email %>
+    </p>
+
+    <% end %>
+
+        <% end %>

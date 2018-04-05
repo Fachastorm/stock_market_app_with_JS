@@ -7,11 +7,12 @@ class WatchlistsController < ApplicationController
         end 
         
         def new
-            @watchlist = current_user.watchlists.build
+            @watchlist = Watchlist.new
+            @watchlist.amounts.build 
         end
 
-        def show 
-            @watchlist = Watchlist.find(params[:id])
+        def show
+            @watchlists = Watchlist.all
         end 
 
         
@@ -49,7 +50,7 @@ class WatchlistsController < ApplicationController
         private 
         
         def watchlist_params 
-            params.require(:watchlist).permit(:name, :description)
+            params.require(:watchlist).permit(:name, :description, amounts_attributes: [:stock_name, :quantity])
         end
 
         def set_user 
