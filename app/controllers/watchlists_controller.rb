@@ -3,7 +3,12 @@ class WatchlistsController < ApplicationController
         before_action :set_user, only: [:index]
 
         def index
-            @watchlists = current_user.watchlists 
+            @watchlists = current_user.watchlists
+            respond_to do |f|
+                f.json {render json: @watchlist}
+                f.html
+                
+            end   
         end 
         
         def new
@@ -19,7 +24,10 @@ class WatchlistsController < ApplicationController
         def create
             @watchlist = current_user.watchlists.build(watchlist_params)
                 if @watchlist.save 
-                 redirect_to user_watchlists_path
+                    respond_to do |f|        
+                        f.html { redirect_to user_watchlists_path}
+                        f.json {render json: @watchlist}
+                    end   
                 else 
                     render :new 
                 end
@@ -54,6 +62,6 @@ class WatchlistsController < ApplicationController
         end
 
         def set_user 
-            @watchlist = current_user.watchlists 
+            @watchlist = current_user.watchlists
         end
     end

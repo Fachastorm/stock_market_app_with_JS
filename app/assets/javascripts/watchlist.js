@@ -1,8 +1,17 @@
-function Watchlist(attributes) { 
-    this.description = attributes.description; 
-    this.name = attributes.name; 
-}
+$(() => { 
+    bindEventListeners()
+})
 
-Watchlist.formSubmitListener = fucntion() { 
-    $('form')
-}
+
+const bindEventListeners = () => {
+    $('a.all_watchlists').on('click', e => {
+        e.preventDefault();
+        var href = $('.all_watchlists').attr('href')
+        fetch(href + '.json')
+        .then(res => res.json())
+        .then(posts => {
+        $('#app-container').html('')
+    
+    })
+})
+};

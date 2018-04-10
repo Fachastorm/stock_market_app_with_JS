@@ -21,7 +21,7 @@
                 <%= f.label "Description" %>
                 <%= f.text_area :description %>
             </div>
-
+            <div class="field">
         <%= f.fields_for :amounts do |amount| %>
             <%= amount.label :stock_name %>
             <%= amount.text_field :stock_name %>
@@ -29,6 +29,7 @@
             <%= amount.text_field :quantity %>
             <% f.hidden_field :user_id , :value => current_user.id %>
         <% end %>
+        </div>
     <div class="action">
     <%= f.submit %>
     </div>
