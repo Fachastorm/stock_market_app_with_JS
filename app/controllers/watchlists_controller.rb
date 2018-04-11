@@ -1,13 +1,12 @@
 class WatchlistsController < ApplicationController
         before_action :authenticate_user!
         before_action :set_user, only: [:index]
-
+        skip_before_action :authenticate_user!, only: [:index]
         def index
-            @watchlists = current_user.watchlists
+            @watchlists = current_user.watchlists            
             respond_to do |f|
-                f.json {render json: @watchlist}
+                f.json {render json: @watchlists}
                 f.html
-                
             end   
         end 
         
@@ -18,6 +17,11 @@ class WatchlistsController < ApplicationController
 
         def show
             @watchlists = Watchlist.all
+            respond_to do |f|
+                f.html
+                f.json {render json: @watchlist}
+            end
+            
         end 
 
         
@@ -25,7 +29,7 @@ class WatchlistsController < ApplicationController
             @watchlist = current_user.watchlists.build(watchlist_params)
                 if @watchlist.save 
                     respond_to do |f|        
-                        f.html { redirect_to user_watchlists_path}
+                        f.html { redirect_to watchlists_path}
                         f.json {render json: @watchlist}
                     end   
                 else 
@@ -41,7 +45,7 @@ class WatchlistsController < ApplicationController
         def update
             @watchlist = Watchlist.find_by(id: params[:id])
             if @watchlist.update(watchlist_params)
-                redirect_to user_watchlists_path(@watchlist.user)
+                redirect_to watchlists_path(@watchlist.user)
             else 
                 render :edit
             end 
@@ -51,7 +55,7 @@ class WatchlistsController < ApplicationController
         def destroy
             @watchlist = Watchlist.find(params[:id])
             @watchlist.destroy
-            redirect_to user_watchlists_path, notice: "#{@watchlist.name} was successfully removed from watchlist."
+            redirect_to watchlists_path, notice: "#{@watchlist.name} was successfully removed from watchlist."
         end
 
 

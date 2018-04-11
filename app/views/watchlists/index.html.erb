@@ -9,11 +9,11 @@
             <%= watchlist.description %><br>
         </td>
         <td>
-            <%= link_to 'Delete', user_watchlist_path(current_user, watchlist), :method => :delete %> |
-            <%= link_to "Edit", edit_user_watchlist_path(current_user, watchlist) %><br>
+            <%= link_to 'Delete', watchlist_path(current_user, watchlist), :method => :delete %> |
+            <%= link_to "Edit", edit_watchlist_path(current_user, watchlist) %><br>
         </td>
         <%end%>
         
-            <%= link_to "Add a stock to the watchlist", new_user_watchlist_path(current_user) %><br>
-            <%= link_to "Vew amounts added", user_watchlist_path(current_user, @watchlist) %>
+            <%= link_to "Add a stock to the watchlist", new_watchlist_path(current_user) %><br>
+            <%= link_to "Vew amounts added", watchlist_path(current_user, @watchlist) %>
             

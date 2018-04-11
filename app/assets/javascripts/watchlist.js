@@ -4,17 +4,31 @@ $(() => {
 
 
 const bindEventListeners = () => {
-    $('a.all_watchlists').on('click', e => {
+    $('.all_watchlists').on('click', e => {
         e.preventDefault();
-        var href = $('.all_watchlists').attr('href')
-        fetch(href + '.json')
-        .then(res => res.json())
-        .then(watchlist => {
-        $('#app-container').html('')
-    
+        var data = {}
+        $.ajax({
+            data: data,
+            dataType: 'application/json',
+            url: 'http://localhost:3000/watchlists.json',
+            type: 'GET',
+            success: function (watchlists) {
+                $('#app-container').html('')
+                watchlists.forEach(watchlist => {
+                let newWatchlist = new Watchlist(watchlist)
+
+                let watchlistHTML = newWatchlist.formatIndex()
+
+                $('#app-container').append(watchlistHTML);
+            },
+            failure: function (errMsg) {
+                alert(errMsg);
+            }
+        });
+        
     })
-})
 };
+
 
 
 function Watchlist(attribute) { 
