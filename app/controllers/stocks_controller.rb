@@ -13,7 +13,7 @@ class StocksController < ApplicationController
         if @stock 
             @user = current_user
             @stock.user_ids = current_user.id
-            render  :search
+            render partial: 'search'
         else 
          @stock.nil? 
          render :search, notice: "Stock does not exist." 

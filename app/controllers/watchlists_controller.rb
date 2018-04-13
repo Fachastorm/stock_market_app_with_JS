@@ -1,14 +1,10 @@
 class WatchlistsController < ApplicationController
-        before_action :authenticate_user!
-        before_action :set_user, only: [:index]
-        skip_before_action :authenticate_user!, only: [:index]
+        before_action :authenticate_user!, except: [:index, :show]
+       
         def index
-            @watchlists = current_user.watchlists            
-            respond_to do |f|
-                f.json {render json: @watchlists}
-                f.html
-            end   
-        end 
+            @watchlists = Watchlist.all
+            render json: @watchlists, status: 200
+        end
         
         def new
             @watchlist = Watchlist.new
@@ -17,25 +13,17 @@ class WatchlistsController < ApplicationController
 
         def show
             @watchlists = Watchlist.all
-            respond_to do |f|
-                f.html
-                f.json {render json: @watchlist}
-            end
-            
         end 
 
         
         def create
             @watchlist = current_user.watchlists.build(watchlist_params)
                 if @watchlist.save 
-                    respond_to do |f|        
-                        f.html { redirect_to watchlists_path}
-                        f.json {render json: @watchlist}
-                    end   
+                    redirect_to watchlists_path 
                 else 
                     render :new 
                 end
-        end 
+            end 
 
         def edit
             @user = User.find_by(params[:id])
@@ -65,7 +53,4 @@ class WatchlistsController < ApplicationController
             params.require(:watchlist).permit(:name, :description, amounts_attributes: [:stock_name, :quantity])
         end
 
-        def set_user 
-            @watchlist = current_user.watchlists
-        end
     end
