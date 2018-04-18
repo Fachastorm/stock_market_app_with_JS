@@ -1,5 +1,11 @@
-<h1>User Information</h1>
+<strong>User:</strong>
+  <%= @position.user_id %>
+</p>
 
+<p>
+  <strong>Stock:</strong>
+  <%= @position.stock_id %>
+</p>
 
-<h3>Email</h3>
-<%= @user.email%> <br>
+<%= link_to 'Edit', edit_position_path(@position) %> |
+<%= link_to 'Back', position_path %>
