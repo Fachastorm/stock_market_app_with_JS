@@ -16,7 +16,7 @@ class StocksController < ApplicationController
             render json: @stock
         else 
          @stock.nil? 
-         render :search, notice: "Stock does not exist." 
+         render 'users/porfolio', notice: "Stock does not exist." 
     end
 end
 

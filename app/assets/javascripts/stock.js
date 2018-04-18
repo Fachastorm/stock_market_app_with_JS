@@ -1,6 +1,5 @@
 $(() => { 
-    $("#new_stock").on("click", e => { 
-        e.preventDefault();
+    $("#stock-form").on("click", "#new_stock", function(e) { 
         $.ajax({ 
             type: "GET", 
             url: this.action, 
@@ -9,7 +8,8 @@ $(() => {
             var stock = new Stock(response)
             var stockHTML = stock.formatItem()
             $('#results').append(stockHTML);
-        })
+        });
+        e.preventDefault();
 })
 });
 

@@ -1,10 +1,10 @@
-<%= form_tag search_stocks_path,  method: :get %>
+<%= form_tag search_stocks_path,  method: :get, id:'stock-form' %>
     <%= text_field_tag :stock, params[:stock_id], placeholder: 'Stock ticker symbol', id: "stock_name"%>
     <%= button_tag(type: 'submit', id:"new_stock") do %>
     <%= content_tag('Look up a stock') %>
     <%end%>
 
-    <div id="results">
+
     <% if @stock %>>
         <strong>Symbol: </strong>
      <%= @stock.ticker %>
@@ -12,7 +12,6 @@
     <%= @stock.name %>
          <strong>Price: </strong>
     <%= @stock.price %>
-    </div>
 
     <% if current_user.can_add_stock? @stock.ticker %>
         <%= link_to 'Add to my stocks', user_positions_path(user_id: current_user.id, stock_ticker: @stock.ticker, stock_id: @stock.id ? @stock.id : ''), method: :post %>
