@@ -36,5 +36,4 @@ Watchlist.prototype.formatList = function() {
 
 
 
-  // Build a comments controller and add comments to watchlist so we can use JS to render comments in DOM // 
-  // Render the comments form and then submit comments to the watchlist // 
+  

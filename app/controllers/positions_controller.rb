@@ -27,7 +27,7 @@ class PositionsController < ApplicationController
         end
       end
         if  @position.save 
-            redirect_to portfolio_path, notice: "Stock was successfully added" 
+            render json: @position, status: 200
         else 
             render :index
         
