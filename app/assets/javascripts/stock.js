@@ -28,14 +28,13 @@ $("#stock-form").on("submit", function(e) {
     </tr>
     </tbody>`);
     $(el).on("click", function(e) {
+        e.preventDefault();
     $.ajax({
         type:"POST",
-        url: $(this).attr('href'), 
+        url: $(this).context.childNodes[1].childNodes[7].lastElementChild.href, 
         data: $(this).serialize(),
     }).success(function(response){
-        debugger
         console.log(response)
-        e.preventDefault();
     })
 })
         $('#results').append(el); //append the resulting stock to the list.
