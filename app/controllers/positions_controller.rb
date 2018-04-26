@@ -20,6 +20,7 @@ class PositionsController < ApplicationController
           stock = Stock.new_from_lookup(params[:stock_ticker])
           if stock.save
             @position = Position.new(user: current_user, stock: stock)
+            render json: @position, status: 200
           else
             @position = nil
             flash[:error] = "Stock is not available"

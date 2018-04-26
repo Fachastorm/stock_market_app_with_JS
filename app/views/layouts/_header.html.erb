@@ -3,7 +3,6 @@
         <%= link_to 'Home', root_path %> |
         <% if user_signed_in? %>
         <%= link_to "My Portfolio", portfolio_path %> |
-        <%= link_to "Stock Price Check", search_stocks_path %> |
         <%= link_to 'Sign Out', destroy_user_session_path, method: 'delete' %> |
         <%= link_to 'Watchlists', watchlists_path(current_user), class:"all_watchlists"%> |
         <%= link_to 'Most Added', most_added_path %>
