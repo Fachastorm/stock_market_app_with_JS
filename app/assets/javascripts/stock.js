@@ -14,7 +14,6 @@ $("#stock-form").on("submit", function(e) {
         data: $(this).serialize(),
     }).success(function(response) {
         var stock = new Stock(response)
-        debugger
         const el = $(`<p>
         ${stock.name}
         ${stock.ticker}
