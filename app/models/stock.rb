@@ -13,7 +13,6 @@ class Stock < ApplicationRecord
         stock_results = StockQuote::Stock.quote(ticker_symbol)
         new_stock = Stock.new(ticker: stock_results.symbol, name: stock_results.company_name)
         new_stock.last_price = new_stock.price
-        new_stock
     end
 
 

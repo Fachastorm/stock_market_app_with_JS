@@ -19,7 +19,7 @@ $("#stock-form").on("submit", function(e) {
         ${stock.ticker}
         ${stock.last_price}
         <a rel="nofollow" class='add-stock' data-method="post" href="/users/${stock.user}/positions?stock_id=&amp;stock_ticker=${stock.ticker}">Add to my stocks</a>`);
-    $('#results').append(el); //append the resulting stock to the page
+    $('#results').html(el); //append the resulting stock to the page
 })
 });
 };

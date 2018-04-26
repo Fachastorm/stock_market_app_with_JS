@@ -1,6 +1,6 @@
 <%= form_tag search_stocks_path,  method: :get, id:'stock-form' %>
     <%= text_field_tag :stock, params[:stock_id], placeholder: 'Stock ticker symbol', id: "stock_name"%>
-    <%= button_tag(type: 'submit', id:"new_stock") do %>
+    <%= button_tag(type: 'button', id:"new_stock") do %>
     <%end%>
 
 
