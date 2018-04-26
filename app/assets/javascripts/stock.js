@@ -14,6 +14,7 @@ $("#stock-form").on("submit", function(e) {
         data: $(this).serialize(),
     }).success(function(response) {
         var stock = new Stock(response)
+        debugger
         const el = $(`<p>
         ${stock.name}
         ${stock.ticker}
@@ -62,7 +63,6 @@ function Stock(stock) {
     this.ticker = stock.ticker
     this.name = stock.name
     this.last_price = stock.last_price
-    this.user = stock.users[0].id
 }
 
 function StockResult(stock) { 
