@@ -3,12 +3,12 @@
 
 <% @watchlists.each do |watchlist| %>
 
-    <p>
+    <ul>
         <% watchlist.amounts.each do |amount| %>
-    </p>
-    <p>
+    </ul>
+    <li>
         <%= amount.stock_name%>: <%= amount.quantity %> added by <%=watchlist.user.email %>
-    </p>
+    </li>
 
     <% end %>
 

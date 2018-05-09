@@ -14,26 +14,27 @@ const bindEventListeners = () => {
                 // debugger
                     let newWatchlist = new Watchlist(watchlist)
                     let watchlistHTML = newWatchlist.formatList()
-                
+                    
                 $('#app-container').append(watchlistHTML)
             })
         })
     })
 }
-
 function Watchlist(watchlist) { 
     this.id = watchlist.id
     this.name = watchlist.name 
     this.description = watchlist.description
+    this.amount = watchlist.amounts[0].quantity
 };
+
 
 Watchlist.prototype.formatList = function() {
     let watchlistHTML = `
-      <p>${this.name} - ${this.description}</p>
+      <ul class="listStocks">
+      <li>${this.name} - ${this.description}</li>
+      </ul>
     `
     return watchlistHTML
   }
 
 
-
-  

@@ -1,19 +1,14 @@
 <h1>Here are all the stocks on your watchlist</h1>
 
 <% @watchlists.each do |watchlist| %>
-    <tr>
-        <td>
+    <ul>
+        <li>
             <%= watchlist.name %> -
-        </td>
-        <td>
+        </li>
+        <li>
             <%= watchlist.description %><br>
-        </td>
-        <td>
-            <%= link_to 'Delete', watchlist_path(current_user, watchlist), :method => :delete %> |
-            <%= link_to "Edit", edit_watchlist_path(current_user, watchlist) %><br>
-        </td>
-        <%end%>
+        </li>
+        <li>
+        </ul>
+<%end%>
         
-            <%= link_to "Add a stock to the watchlist", new_watchlist_path(current_user) %><br>
-            <%= link_to "Vew amounts added", watchlist_path(current_user, @watchlist) %>
-            

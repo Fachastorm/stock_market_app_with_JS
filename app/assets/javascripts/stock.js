@@ -13,11 +13,11 @@ $("#stock-form").on("submit", function(e) {
         url: $(this).attr('action'), 
         data: $(this).serialize(),
     }).success(function(response) {
-        var stock = new Stock(response)
+        const stock = new Stock(response)
         const el = $(`<p>
         ${stock.name}
         ${stock.ticker}
-        ${stock.last_price}
+        ${stock.lastPrice}
         <a rel="nofollow" class='add-stock' data-method="post" href="/users/${stock.user}/positions?stock_id=&amp;stock_ticker=${stock.ticker}">Add to my stocks</a>`);
     $('#results').html(el); //append the resulting stock to the page
 })
@@ -43,7 +43,7 @@ $.ajax({
            ${stock.ticker}
        </td>
        <td>
-           ${stock.last_price} (Closing)
+           ${stock.lastPrice} (Closing)
        </td>
            <td>
                <a rel="nofollow" data-method="delete" href="/users/${stock.user}/positions/${stock.id}">Delete</a>
@@ -61,13 +61,13 @@ return false;
 function Stock(stock) { 
     this.ticker = stock.ticker
     this.name = stock.name
-    this.last_price = stock.last_price
+    this.lastPrice = stock.last_price
 }
 
 function StockResult(stock) { 
     this.ticker = stock.stock.ticker
     this.name = stock.stock.name
-    this.last_price = stock.stock.last_price
+    this.lastPrice = stock.stock.last_price
     this.user = stock.user.id
     this.id = stock.stock.id
 }
@@ -99,7 +99,7 @@ StockResult.prototype.formatItem = function() {
     ${this.ticker}
     </td>
     <td>
-    ${this.last_price}
+    ${this.lastPrice}
     </td>
 </tr>
 </tbody>`
